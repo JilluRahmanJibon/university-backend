@@ -1,5 +1,7 @@
+/* eslint-disable no-unused-vars */
 // 1. Create an interface representing a document in MongoDB.
 
+import { Types } from 'mongoose';
 import { Model } from 'mongoose';
 
 export type TUserName = {
@@ -25,8 +27,8 @@ export type TLocalGuardian = {
 
 export type TStudent = {
   id: string;
+  user: Types.ObjectId;
   name: TUserName;
-  password: string;
   gender: 'male' | 'female' | 'other';
   email: string;
   dateOfBirth?: string;
@@ -38,7 +40,6 @@ export type TStudent = {
   guardian: TGuardian;
   localGuardian: TLocalGuardian;
   profileImage?: string;
-  isActive: 'active' | 'blocked';
   isDeleted: boolean;
 };
 

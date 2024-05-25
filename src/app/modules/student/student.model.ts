@@ -1,5 +1,4 @@
 import { Schema, model } from 'mongoose';
-import bcrypt from 'bcrypt';
 import validator from 'validator';
 import {
   TGuardian,
@@ -8,7 +7,6 @@ import {
   TUserName,
   StudentModel,
 } from './student.interface';
-import config from '../../config';
 
 // 2. Create a Schema corresponding to the document interface.
 const userNameSchema = new Schema<TUserName>({
@@ -102,16 +100,16 @@ const studentSchema = new Schema<TStudent, StudentModel>(
       trim: true,
       required: [true, 'Student ID is required!'],
       unique: true,
+      ref: 'User',
+    },
+    user: {
+      type: Schema.Types.ObjectId,
+      required: [true, 'User id is required!'],
+      unique: true,
     },
     name: {
       type: userNameSchema,
       required: [true, 'Student Name is required!'],
-    },
-    password: {
-      type: String,
-      trim: true,
-      required: [true, 'Password is required!'],
-      maxlength: [20, 'password can not be mor than 20 characters'],
     },
     gender: {
       type: String,
@@ -168,11 +166,6 @@ const studentSchema = new Schema<TStudent, StudentModel>(
       required: [true, 'Local Guardian information is required!'],
     },
     profileImage: { type: String, trim: true },
-    isActive: {
-      type: String,
-      enum: ['active', 'blocked'],
-      default: 'active',
-    },
     isDeleted: {
       type: Boolean,
       default: false,
@@ -188,25 +181,6 @@ const studentSchema = new Schema<TStudent, StudentModel>(
 // virtual
 studentSchema.virtual('fullName').get(function () {
   return `${this.name.firstName} ${this.name.middleName} ${this.name.lastName}`;
-});
-
-// pre save middlewear/hook : will work on save() , crate() method
-studentSchema.pre('save', async function (next) {
-  // console.log(this, 'pre hook : we will save the data');
-  // eslint-disable-next-line @typescript-eslint/no-this-alias
-  const user = this;
-  // hashing password and set in to DB
-  user.password = await bcrypt.hash(
-    user.password,
-    Number(config.bcryp_salt_rounds),
-  );
-  next();
-});
-
-// post save middlewear / hook document middlewear
-studentSchema.post('save', (doc, next) => {
-  doc.password = '';
-  next();
 });
 
 /// query middlewear
