@@ -48,34 +48,41 @@ const localGuardianValidationSchema = z.object({
 });
 
 // Define the main Student Zod schema
-const studentValidationSchema = z.object({
-  id: z.string().trim().min(1, 'Student ID is required!'),
-  name: userNameValidationSchema,
-  password: z.string().trim().min(8, 'Password is required!').max(20),
-  gender: z
-    .enum(['male', 'female', 'other'])
-    .refine((value) => ['male', 'female', 'other'].includes(value), {
-      message: 'Gender is not valid',
+const createStudentValidationSchema = z.object({
+  body: z.object({
+    password: z.string().trim().min(8, 'Password is required!').max(20),
+    student: z.object({
+      name: userNameValidationSchema,
+      gender: z
+        .enum(['male', 'female', 'other'])
+        .refine((value) => ['male', 'female', 'other'].includes(value), {
+          message: 'Gender is not valid',
+        }),
+      email: z
+        .string()
+        .trim()
+        .email('Email is not valid')
+        .min(1, 'Email is required!'),
+      dateOfBirth: z.string().optional(),
+      contactNumber: z.string().trim().min(10, 'Contact Number is required!'),
+      emergencyContactNo: z
+        .string()
+        .trim()
+        .min(1, 'Emergency Contact Number is required!'),
+      bloodGroup: z.enum(['A+', 'A-', 'AB+', 'AB-', 'O+', 'O-']).optional(),
+      presentAddress: z.string().trim().min(1, 'Present Address is required!'),
+      permanentAddress: z
+        .string()
+        .trim()
+        .min(1, 'Permanent Address is required!'),
+      guardian: guardianValidationSchema,
+      localGuardian: localGuardianValidationSchema,
+      admissionSemester:z.string(),
+      profileImage: z.string().trim().optional(),
     }),
-  email: z
-    .string()
-    .trim()
-    .email('Email is not valid')
-    .min(1, 'Email is required!'),
-  dateOfBirth: z.string().optional(),
-  contactNumber: z.string().trim().min(1, 'Contact Number is required!'),
-  emergencyContactNo: z
-    .string()
-    .trim()
-    .min(1, 'Emergency Contact Number is required!'),
-  bloodGroup: z.enum(['A+', 'A-', 'AB+', 'AB-', 'O+', 'O-']).optional(),
-  presentAddress: z.string().trim().min(1, 'Present Address is required!'),
-  permanentAddress: z.string().trim().min(1, 'Permanent Address is required!'),
-  guardian: guardianValidationSchema,
-  localGuardian: localGuardianValidationSchema,
-  profileImage: z.string().trim().optional(),
-  isActive: z.enum(['active', 'blocked']).default('active'),
-  // isDeleted: z.boolean(),
+  }),
 });
 
-export default studentValidationSchema;
+export const studentValidations = {
+  createStudentValidationSchema,
+};
