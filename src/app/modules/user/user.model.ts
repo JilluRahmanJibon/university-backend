@@ -1,14 +1,13 @@
-import { Schema, model } from 'mongoose';
 import bcrypt from 'bcrypt';
-import { TUser } from './user.interface';
+import { Schema, model } from 'mongoose';
 import config from '../../config';
-
+import { TUser } from './user.interface';
 const userSchema = new Schema<TUser>(
   {
     id: {
       type: String,
       required: true,
-      unique:true
+      unique: true,
     },
     password: {
       type: String,
@@ -37,21 +36,19 @@ const userSchema = new Schema<TUser>(
   },
 );
 
-// pre save middlewear/hook : will work on save() , crate() method
 userSchema.pre('save', async function (next) {
-  // console.log(this, 'pre hook : we will save the data');
   // eslint-disable-next-line @typescript-eslint/no-this-alias
-  const user = this;
-  // hashing password and set in to DB
+  const user = this; // doc
+  // hashing password and save into DB
   user.password = await bcrypt.hash(
     user.password,
-    Number(config.bcryp_salt_rounds),
+    Number(config.bcrypt_salt_rounds),
   );
   next();
 });
 
 // set '' after saving password
-userSchema.post('save', (doc, next) => {
+userSchema.post('save', function (doc, next) {
   doc.password = '';
   next();
 });

@@ -1,15 +1,15 @@
 import { z } from 'zod';
 import {
-  AcademicSemesterCodes,
-  AcademicSemesterNames,
+  AcademicSemesterCode,
+  AcademicSemesterName,
   Months,
 } from './academicSemester.constant';
 
-const createAcademicSemesterValidation = z.object({
+const createAcdemicSemesterValidationSchema = z.object({
   body: z.object({
-    name: z.enum([...AcademicSemesterNames] as [string, ...string[]]),
-    code: z.enum([...AcademicSemesterCodes] as [string, ...string[]]),
+    name: z.enum([...AcademicSemesterName] as [string, ...string[]]),
     year: z.string(),
+    code: z.enum([...AcademicSemesterCode] as [string, ...string[]]),
     startMonth: z.enum([...Months] as [string, ...string[]]),
     endMonth: z.enum([...Months] as [string, ...string[]]),
   }),
@@ -17,15 +17,15 @@ const createAcademicSemesterValidation = z.object({
 
 const updateAcademicSemesterValidationSchema = z.object({
   body: z.object({
-    name: z.enum([...AcademicSemesterNames] as [string, ...string[]]).optional(),
-    code: z.enum([...AcademicSemesterCodes] as [string, ...string[]]).optional(),
+    name: z.enum([...AcademicSemesterName] as [string, ...string[]]).optional(),
     year: z.string().optional(),
+    code: z.enum([...AcademicSemesterCode] as [string, ...string[]]).optional(),
     startMonth: z.enum([...Months] as [string, ...string[]]).optional(),
     endMonth: z.enum([...Months] as [string, ...string[]]).optional(),
   }),
 });
 
-
-export const academicSemesterValidations = {
-  createAcademicSemesterValidation,updateAcademicSemesterValidationSchema
+export const AcademicSemesterValidations = {
+  createAcdemicSemesterValidationSchema,
+  updateAcademicSemesterValidationSchema,
 };

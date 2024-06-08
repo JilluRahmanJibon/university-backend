@@ -1,9 +1,10 @@
-export class AppError extends Error {
+class AppError extends Error {
   public statusCode: number;
 
-  constructor(statusCode: number, message: string, stack: '') {
+  constructor(statusCode: number, message: string, stack = '') {
     super(message);
     this.statusCode = statusCode;
+
     if (stack) {
       this.stack = stack;
     } else {
@@ -11,3 +12,5 @@ export class AppError extends Error {
     }
   }
 }
+
+export default AppError;
