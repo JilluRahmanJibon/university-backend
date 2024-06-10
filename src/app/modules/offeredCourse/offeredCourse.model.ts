@@ -39,11 +39,11 @@ const offeredCourseSchema = new Schema(
       required: true,
     },
     section: { type: String, required: true },
-    days: {
+    days:[ {
       type: String,
       enum: Days,
       required: true,
-    },
+    }],
     startTime: { type: String, required: true },
     endTime: { type: String, required: true },
   },
