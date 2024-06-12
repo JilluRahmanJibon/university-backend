@@ -1,8 +1,8 @@
-import { Schema, model } from 'mongoose';
-import { TSemesterRegistration } from './semesterRegistration.interface';
+import mongoose, { Schema } from 'mongoose';
 import { SemesterRegistrationStatus } from './semesterRegistration.constant';
+import { TSemesterRegistration } from './semesterRegistration.interface';
 
-const createSemesterRegistrationSchema = new Schema<TSemesterRegistration>(
+const semesterRegistrationSchema = new mongoose.Schema<TSemesterRegistration>(
   {
     academicSemester: {
       type: Schema.Types.ObjectId,
@@ -32,10 +32,12 @@ const createSemesterRegistrationSchema = new Schema<TSemesterRegistration>(
       default: 15,
     },
   },
-  { timestamps: true },
+  {
+    timestamps: true,
+  },
 );
 
-export const SemesterRegistration = model<TSemesterRegistration>(
+export const SemesterRegistration = mongoose.model<TSemesterRegistration>(
   'SemesterRegistration',
-  createSemesterRegistrationSchema,
+  semesterRegistrationSchema,
 );

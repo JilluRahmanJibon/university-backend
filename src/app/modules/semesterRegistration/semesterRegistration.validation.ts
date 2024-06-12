@@ -1,5 +1,6 @@
-import z from 'zod'
-import { SemesterRegistrationStatus } from './semesterRegistration.constant'
+import { z } from 'zod';
+import { SemesterRegistrationStatus } from './semesterRegistration.constant';
+
 const createSemesterRegistrationValidationSchema = z.object({
   body: z.object({
     academicSemester: z.string(),
@@ -10,10 +11,13 @@ const createSemesterRegistrationValidationSchema = z.object({
     maxCredit: z.number(),
   }),
 });
-const updateSemesterRegistrationValidationSchema = z.object({
+
+const upadateSemesterRegistrationValidationSchema = z.object({
   body: z.object({
     academicSemester: z.string().optional(),
-    status: z.enum([...(SemesterRegistrationStatus as [string, ...string[]])]).optional(),
+    status: z
+      .enum([...(SemesterRegistrationStatus as [string, ...string[]])])
+      .optional(),
     startDate: z.string().datetime().optional(),
     endDate: z.string().datetime().optional(),
     minCredit: z.number().optional(),
@@ -22,5 +26,6 @@ const updateSemesterRegistrationValidationSchema = z.object({
 });
 
 export const SemesterRegistrationValidations = {
-    createSemesterRegistrationValidationSchema,updateSemesterRegistrationValidationSchema
-}
+  createSemesterRegistrationValidationSchema,
+  upadateSemesterRegistrationValidationSchema,
+};

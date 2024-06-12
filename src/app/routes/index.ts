@@ -1,14 +1,15 @@
 import { Router } from 'express';
 import { AdminRoutes } from '../modules/Admin/admin.route';
+import { AuthRoutes } from '../modules/Auth/auth.route';
 import { CourseRoutes } from '../modules/Course/course.route';
 import { FacultyRoutes } from '../modules/Faculty/faculty.route';
+import { offeredCourseRoutes } from '../modules/OfferedCourse/OfferedCourse.route';
 import { AcademicDepartmentRoutes } from '../modules/academicDepartment/academicDepartment.route';
 import { AcademicFacultyRoutes } from '../modules/academicFaculty/academicFaculty.route';
 import { AcademicSemesterRoutes } from '../modules/academicSemester/academicSemester.route';
+import { semesterRegistrationRoutes } from '../modules/semesterRegistration/semesterRegistration.route';
 import { StudentRoutes } from '../modules/student/student.route';
 import { UserRoutes } from '../modules/user/user.route';
-import { SemesterRegistrationRoutes } from '../modules/semesterRegistration/semesterRegistration.route';
-import { OfferedCouresRoutes } from '../modules/offeredCourse/offeredCourse.route';
 
 const router = Router();
 
@@ -17,7 +18,7 @@ const moduleRoutes = [
     path: '/users',
     route: UserRoutes,
   },
-  { 
+  {
     path: '/students',
     route: StudentRoutes,
   },
@@ -47,11 +48,15 @@ const moduleRoutes = [
   },
   {
     path: '/semester-registrations',
-    route: SemesterRegistrationRoutes,
+    route: semesterRegistrationRoutes,
   },
   {
     path: '/offered-courses',
-    route: OfferedCouresRoutes,
+    route: offeredCourseRoutes,
+  },
+  {
+    path: '/auth',
+    route: AuthRoutes,
   },
 ];
 

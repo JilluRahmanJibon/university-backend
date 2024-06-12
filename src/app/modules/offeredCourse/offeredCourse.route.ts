@@ -1,14 +1,29 @@
-import { Router } from "express";
-import { OfferedCourseControllers } from "./offeredCourse.controller";
-import validateRequest from "../../middlewares/validateRequest";
-import { OfferedCourseValidations } from "./offeredCourse.validation";
+import express from 'express';
+import validateRequest from '../../middlewares/validateRequest';
+import { OfferedCourseControllers } from './OfferedCourse.controller';
+import { OfferedCourseValidations } from './OfferedCourse.validation';
 
-const router = Router()
+const router = express.Router();
 
-router.post('/create-offerd-course',validateRequest(OfferedCourseValidations.createOfferedCourseValidationSchema),OfferedCourseControllers.createOfferedCourse)
-router.get('/',OfferedCourseControllers.createOfferedCourse)
-router.get('/:id',OfferedCourseControllers.createOfferedCourse)
-router.patch('/:id', OfferedCourseControllers.createOfferedCourse)
+router.get('/', OfferedCourseControllers.getAllOfferedCourses);
 
+router.get('/:id', OfferedCourseControllers.getSingleOfferedCourses);
 
-export const OfferedCouresRoutes= router
+router.post(
+  '/create-offered-course',
+  validateRequest(OfferedCourseValidations.createOfferedCourseValidationSchema),
+  OfferedCourseControllers.createOfferedCourse,
+);
+
+router.patch(
+  '/:id',
+  validateRequest(OfferedCourseValidations.updateOfferedCourseValidationSchema),
+  OfferedCourseControllers.updateOfferedCourse,
+);
+
+router.delete(
+  '/:id',
+  OfferedCourseControllers.deleteOfferedCourseFromDB,
+);
+
+export const offeredCourseRoutes = router;
