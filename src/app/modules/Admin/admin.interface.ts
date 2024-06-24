@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { Model, Types } from 'mongoose';
 
 export type TGender = 'male' | 'female' | 'other';
@@ -28,7 +27,7 @@ export type TAdmin = {
   email: string;
   contactNo: string;
   emergencyContactNo: string;
-  bloodGroup?: TBloodGroup;
+  bloogGroup?: TBloodGroup;
   presentAddress: string;
   permanentAddress: string;
   profileImg?: string;
