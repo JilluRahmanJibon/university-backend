@@ -11,7 +11,7 @@ const createStudent = catchAsync(async (req, res) => {
     req.file,
     password,
     studentData,
-  );
+  );  
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
@@ -50,7 +50,7 @@ const createAdmin = catchAsync(async (req, res) => {
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'Admin is created succesfully',
+    message: 'Admin is created successfully',
     data: result,
   });
 });
@@ -65,7 +65,7 @@ const getMe = catchAsync(async (req, res) => {
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'User is retrieved succesfully',
+    message: 'User is retrieved successfully',
     data: result,
   });
 });
@@ -78,7 +78,7 @@ const changeStatus = catchAsync(async (req, res) => {
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'Status is updated succesfully',
+    message: 'Status is updated successfully',
     data: result,
   });
 });

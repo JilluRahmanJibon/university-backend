@@ -4,7 +4,7 @@ import app from './app';
 import config from './app/config';
 import seedSuperAdmin from './app/DB';
 
-let server: Server;
+let server: Server; 
 
 async function main() {
   try {
@@ -21,7 +21,7 @@ async function main() {
 main();
 
 process.on('unhandledRejection', (err) => {
-  console.log(`😈 unahandledRejection is detected , shutting down ...`, err);
+  console.log(`😈 UnaHandledRejection is detected , shutting down ...`, err);
   if (server) {
     server.close(() => { 
       process.exit(1);

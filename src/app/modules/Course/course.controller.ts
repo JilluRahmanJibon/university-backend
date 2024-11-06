@@ -32,7 +32,7 @@ const getSingleCourse = catchAsync(async (req, res) => {
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'Course is retrieved succesfully',
+    message: 'Course is retrieved successfully',
     data: result,
   });
 });
@@ -44,7 +44,7 @@ const updateCourse = catchAsync(async (req, res) => {
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'course is updated succesfully',
+    message: 'course is updated successfully',
     data: result,
   });
 });
@@ -56,7 +56,7 @@ const deleteCourse = catchAsync(async (req, res) => {
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'Course is deleted succesfully',
+    message: 'Course is deleted successfully',
     data: result,
   });
 });
@@ -73,7 +73,7 @@ const assignFacultiesWithCourse = catchAsync(async (req, res) => {
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'Faculties assigned  succesfully',
+    message: 'Faculties assigned  successfully',
     data: result,
   });
 });
@@ -104,3 +104,4 @@ export const CourseControllers = {
   assignFacultiesWithCourse,
   removeFacultiesFromCourse,
 };
+  
