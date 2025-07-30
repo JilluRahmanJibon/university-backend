@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { v2 as cloudinary } from 'cloudinary';
+import { UploadApiResponse, v2 as cloudinary } from 'cloudinary';
 import fs from 'fs';
 import multer from 'multer';
 import config from '../config';
@@ -10,28 +9,19 @@ cloudinary.config({
   api_secret: config.cloudinary_api_secret,
 });
 
-interface UploadApiResponse {
-  // Add properties based on Cloudinary's upload API response structure
-  public_id: string;
-  url: string;
-  [key: string]: any;
-}
-
 export const sendImageToCloudinary = (
   imageName: string,
   path: string,
-): Promise<UploadApiResponse> => {
+): Promise<Record<string, unknown>> => {
   return new Promise((resolve, reject) => {
-    cloudinary.uploader
-      .upload(path, { public_id: imageName.trim() }, function (error, result) {
+    cloudinary.uploader.upload(
+      path,
+      { public_id: imageName.trim() },
+      function (error, result) {
         if (error) {
           reject(error);
         }
-        if (result) {
-          resolve(result as UploadApiResponse);
-        }
-      })
-      .finally(() => {
+        resolve(result as UploadApiResponse);
         // delete a file asynchronously
         fs.unlink(path, (err) => {
           if (err) {
@@ -40,7 +30,8 @@ export const sendImageToCloudinary = (
             console.log('File is deleted.');
           }
         });
-      });
+      },
+    );
   });
 };
 

@@ -2,7 +2,7 @@ import { z } from 'zod';
 import { UserStatus } from './user.constant';
 
 const userValidationSchema = z.object({
-  password: z
+  pasword: z
     .string({
       invalid_type_error: 'Password must be string',
     })

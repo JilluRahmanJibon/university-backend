@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { Model, Types } from 'mongoose';
 
 export type TUserName = {
@@ -32,7 +31,7 @@ export type TStudent = {
   email: string;
   contactNo: string;
   emergencyContactNo: string;
-  bloodGroup?: 'A+' | 'A-' | 'B+' | 'B-' | 'AB+' | 'AB-' | 'O+' | 'O-';
+  bloogGroup?: 'A+' | 'A-' | 'B+' | 'B-' | 'AB+' | 'AB-' | 'O+' | 'O-';
   presentAddress: string;
   permanentAddress: string;
   guardian: TGuardian;
@@ -45,8 +44,7 @@ export type TStudent = {
 };
 
 //for creating static
-
 export interface StudentModel extends Model<TStudent> {
+  // eslint-disable-next-line no-unused-vars
   isUserExists(id: string): Promise<TStudent | null>;
 }
- 

@@ -110,7 +110,7 @@ const studentSchema = new Schema<TStudent, StudentModel>(
       type: String,
       required: [true, 'Emergency contact number is required'],
     },
-    bloodGroup: {
+    bloogGroup: {
       type: String,
       enum: {
         values: ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'],
@@ -133,22 +133,22 @@ const studentSchema = new Schema<TStudent, StudentModel>(
       type: localGuradianSchema,
       required: [true, 'Local guardian information is required'],
     },
-    profileImg: { type: String,default:"" },
+    profileImg: { type: String, default: '' },
     admissionSemester: {
       type: Schema.Types.ObjectId,
       ref: 'AcademicSemester',
     },
-    academicFaculty: {
-      type: Schema.Types.ObjectId,
-      ref: 'AcademicFaculty',
+    isDeleted: {
+      type: Boolean,
+      default: false,
     },
     academicDepartment: {
       type: Schema.Types.ObjectId,
       ref: 'AcademicDepartment',
     },
-    isDeleted: {
-      type: Boolean,
-      default: false,
+    academicFaculty: {
+      type: Schema.Types.ObjectId,
+      ref: 'AcademicFaculty',
     },
   },
   {
